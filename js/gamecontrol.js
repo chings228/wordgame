@@ -4,6 +4,8 @@ export default class GameControl{
 
     counter = 0;
 
+    data 
+
     constructor(){
 
 
@@ -15,7 +17,20 @@ export default class GameControl{
     start(){
 
 
+        console.log("start")
+        console.log(this.data[this.counter])
 
+        
+        this.setQuestion()
+
+    }
+
+
+    setQuestion(){
+
+        var question =  this.data[this.counter];
+
+        console.log(question)
 
     }
 
@@ -29,6 +44,13 @@ export default class GameControl{
             var data = JSON.parse(e)
     
             console.log(data)
+
+            this.data = data
+
+            console.log(this.data)
+
+
+            this.start()
     
     
         })
