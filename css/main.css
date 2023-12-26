@@ -44,17 +44,51 @@
 
     background-color: yellow;
     display: flex;
+    justify-content: center;
 
 }
 
 .gamewordcharacter{
 
-    background-color: darkred;
 
-    border-bottom: solid black 4px;
+
+
+    width:60px;
+
+
+    height:80px;
+
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    position:absolute;
+
+
+
+}
+
+.gamewordcharacterhint{
+
+
+    width:60px;
+
+
+    height:80px;
+
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    color:	rgba(136,136,136,0.8)
+
+
+    
+}
+
+.gamewordcharactercontainer{
+
     margin-left : 5px;
-
-    width:40px;
-    overflow: none;
+    border-bottom: solid black 4px;
+    font-size:50px;
+    /* background-color: tomato; */
 
 }
