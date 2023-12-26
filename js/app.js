@@ -1,8 +1,9 @@
 
+import GameControl from "./gamecontrol.js"
 import GameWord from "./gameword.js"
 
 
-var gameword
+var gameword , gamecontrol
 
 
 
@@ -13,7 +14,14 @@ $(function(){
 
     gameword = new GameWord()
 
-     gameword.setupword(8)
+    window.gameword = gameword
+
+    gamecontrol = new GameControl()
+
+    window.gamecontrol = gamecontrol
+
+
+    //  gameword.setupword(8)
     
 
 
@@ -21,7 +29,12 @@ $(function(){
 
     //$("#word_1 > .gamewordcharacter").html("c")
 
+
+    gamecontrol.load()
+
 })
+
+
 
 
 
