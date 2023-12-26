@@ -1,0 +1,60 @@
+
+*{
+
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+    
+
+}
+
+:root{
+
+    --container-margin : 20px;
+}
+
+
+.container{
+
+    background-color: aliceblue;
+    min-width: 400px;
+    max-width:800px;
+    height:calc(100vh - 2 * var(--container-margin));
+    margin:  var(--container-margin) auto var(--container-margin) auto;
+
+    
+
+
+}
+
+
+.gameimg{
+
+
+    background-color: beige;
+}
+
+
+.gamedetail{
+
+    background-color: burlywood;
+}
+
+.gameword{
+
+    background-color: yellow;
+    display: flex;
+
+}
+
+.gamewordcharacter{
+
+    background-color: darkred;
+
+    border-bottom: solid black 4px;
+    margin-left : 5px;
+
+    width:40px;
+    overflow: none;
+
+}
