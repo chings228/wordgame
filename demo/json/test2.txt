@@ -10,18 +10,6 @@
     {
       "word":"Kitchen",
       "type":"image"
-  },
-    {
-      "word":"Dining Room",
-      "type":"image"
-  },
-    {
-      "word":"Toilet",
-      "type":"image"
-  },
-    {
-      "word":"Balcony",
-      "type":"image"
   }
 
 

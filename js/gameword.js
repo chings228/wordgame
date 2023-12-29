@@ -3,76 +3,93 @@
 export default class GameWord{
 
 
-    counter = 0;
+    guessCounter = 0;
     wordcount = 0;
+    word;
+
+    hintTimer;
+    hintCounter = 0;
+
+    isKeyboard = true;
+
+
+    timerHintStart = 2000
+    timerHintNextCharacterShow = 1000
 
 
     constructor(){
 
         console.log("gameword constructor")
 
+
+        document.addEventListener("keydown",e=>{
+
+            if (this.isKeyboard){
+                this.keytype(e)
+            }
+           
+        })
+
         
     }
 
 
-    addKeyboardListener(){
 
-        document.addEventListener('keydown',e=>{
-            console.log(this.counter)
+
+
+
+
+    keytype(e){
+
+            console.log(this.guessCounter)
 
    
 
             var key = e.key;
-            var code = e.code;
+
             var keycode = e.keyCode;
-            var isShift = e.shiftKey;
-
-          
-            console.log(keycode)
 
 
-
-            
-
-            if (keycode == 8 && this.counter > 0) {
+            if (keycode == 8 && this.guessCounter > 0) {
 
 
 
-                this.counter--
+                this.guessCounter--
 
-                var elementdiv = `#word_${this.counter} > .gamewordcharacter`
+                var elementdiv = `#word_${this.guessCounter} > .gamewordcharacter`
                 $(elementdiv).html('')
             }
             else{
 
-                if (((keycode >= 65 && keycode <= 90) || keycode == 189 || keycode == 32 || (keycode >= 48 && keycode <= 57)) && this.counter <=  this.wordcount - 1){
+                if (((keycode >= 65 && keycode <= 90) || keycode == 189 || keycode == 32 || (keycode >= 48 && keycode <= 57)) && this.guessCounter < this.word.length ){
 
 
-                    var elementdiv = `#word_${this.counter} > .gamewordcharacter`
+                    var elementdiv = `#word_${this.guessCounter} > .gamewordcharacter`
 
-                    console.log(elementdiv)
-                    console.log($(elementdiv))
 
                     $(elementdiv).html(key.toUpperCase())
 
 
 
+                    this.guessCounter++
 
 
-                    this.counter++
+                    if (this.guessCounter > this.word.length - 1){
+
+                        console.log("check answer")
+                        this.checkanswer();
+                    }
+
                 }
 
-                else{
 
-                    // check answer 
-                }
 
 
 
             }
 
 
-        })
+        
 
 
 
@@ -82,9 +99,101 @@ export default class GameWord{
     }
 
 
-    setupword(wordcount){
 
-        this.wordcount = wordcount
+    checkanswer(){
+
+        var guess = ''
+
+        for (var i=0 ; i<this.word.length ; i++){
+
+
+            var elementdiv = `#word_${i} > .gamewordcharacter`
+
+            guess += $(elementdiv).html()
+        }
+
+        console.log(guess)
+
+
+        if  (guess == this.word){
+
+            this.isKeyboard = false
+
+            console.log("bingo")
+            this.isKeyboard= false;
+            this.goNextWord()
+        }
+
+       
+    }
+
+
+
+    goNextWord(){
+
+        clearTimeout(this.hintTimer)
+
+        this.guessCounter = 0;
+        this.hintCounter = 0;
+
+        console.log("go Next word");
+
+        console.log(gamecontrol)
+
+        if (gamecontrol.goNextQuestion() != 0){
+
+            var that = this
+        setTimeout(function(){
+
+          
+
+                that.guessCounter = 0;
+                that.hintCounter = 0;
+    
+                gamecontrol.setQuestion()
+    
+                that.isKeyboard = true
+    
+    
+           
+
+        },1000)
+
+    }
+    else{
+        console.log("end of test")
+        this.endOfTest()
+    }
+
+
+        
+
+    }
+
+
+
+
+
+endOfTest(){
+
+    console.log("end of test")
+
+    bootbox.alert({
+        
+        message:"sfsfsfsf",
+        centerVertical:true
+
+    })
+}
+
+
+
+
+    setupword(word){
+
+        console.log(word)
+        this.word = word 
+
 
         var wordcontainer = $(".gameword");
 
@@ -93,9 +202,9 @@ export default class GameWord{
 
 
 
-        for(var i=0; i<wordcount; i++){
+        for(var i=0; i<this.word.length; i++){
 
-            console.log(i)
+            //console.log(i)
 
             htmltext += `
             
@@ -114,8 +223,65 @@ export default class GameWord{
 
         wordcontainer.html(htmltext)
 
-        this.addKeyboardListener()
+
+        // timer for starting show hint 
+
+        var that = this
+
+        setTimeout(function(){
+
+
+            that.showHint()
+
+        },this.timerHintStart)
+
+        
             
+    }
+
+
+    showHint(){
+
+
+
+        var character = this.word.charAt(this.hintCounter)
+
+
+
+
+        var elementdiv = `#word_${this.hintCounter} > .gamewordcharacterhint`
+
+
+
+        $(elementdiv).html(character.toUpperCase())
+
+
+
+
+        if (this.hintCounter < this.word.length - 1 && this.isKeyboard == true){
+
+            this.hintCounter ++
+
+            var that = this
+
+            that.hintTimer = setTimeout(function(){
+
+
+                that.showHint()
+            },this.timerHintNextCharacterShow)
+
+        }
+        else{
+
+            //this.isKeyboard = false
+
+            console.log("next")
+
+            this.goNextWord()
+
+        }
+
+
     }
 
 
