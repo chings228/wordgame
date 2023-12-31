@@ -28,16 +28,38 @@
 }
 
 
+.gamecontent{
+
+    height: 10vh;
+    
+}
+
+
+
 .gameimg{
 
 
     background-color: beige;
+    display:none;
+}
+
+.gametext{
+    background-color: lightgrey;
+    display:none;
+
+}
+
+.gamevoice{
+    background-color: limegreen;
+    display:none;
 }
 
 
 .gamedetail{
 
     background-color: burlywood;
+    height:10vh;
+   
 }
 
 .gameword{

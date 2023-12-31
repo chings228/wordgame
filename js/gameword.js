@@ -1,4 +1,4 @@
-
+import GameInterface from "./gameinterface.js";
 
 export default class GameWord{
 
@@ -178,12 +178,12 @@ endOfTest(){
 
     console.log("end of test")
 
-    bootbox.alert({
+    // bootbox.alert({
         
-        message:"sfsfsfsf",
-        centerVertical:true
+    //     message:"sfsfsfsf",
+    //     centerVertical:true
 
-    })
+    // })
 }
 
 
@@ -191,37 +191,14 @@ endOfTest(){
 
     setupword(word){
 
+
+        new GameInterface(word)
+
         console.log(word)
-        this.word = word 
-
-
-        var wordcontainer = $(".gameword");
-
-
-        var htmltext = '';
+        this.word = word.word 
 
 
 
-        for(var i=0; i<this.word.length; i++){
-
-            //console.log(i)
-
-            htmltext += `
-            
-               <div class='gamewordcharactercontainer' id='word_${i}'>
-
-                <div class='gamewordcharacter'></div>
-                <div class='gamewordcharacterhint'></div>
-
-               </div>
-            
-            
-            `
-
-
-        }
-
-        wordcontainer.html(htmltext)
 
 
         // timer for starting show hint 

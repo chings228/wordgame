@@ -1,3 +1,13 @@
+
+{
+
+    words:
+
+
+
+
+
+
 [
   {
       "word":"Cookie",
@@ -27,5 +37,19 @@
 
 
 
-]
+],
+
+
+manifest:{
+
+    isRandom:true
+}
+
+
+}
+
+
+
+
+
   

@@ -1,19 +1,31 @@
-[
+
+
+{
+
+"words":[
   {
       "word":"Cookie",
-      "type":"image"
+      "type":"image",
+      "image":"demo1.jpg"
   },
   {
       "word":"Biscuit",
-      "type":"image"
+      "type":"image",
+      "image":"demo2.jpg"
   },
     {
       "word":"Kitchen",
-      "type":"image"
+      "type":"image",
+      "image":"demo3.jpg"
   }
 
 
 
 
-]
+],
+
+"manifest":{
+  "isRandom":false
+}
   
+}

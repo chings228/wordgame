@@ -1,10 +1,13 @@
+
+
 export default class GameControl{
 
 
 
     counter = 0;
 
-    data 
+    word;
+    manifest;
 
     constructor(){
 
@@ -15,7 +18,7 @@ export default class GameControl{
 
     goNextQuestion(){
 
-        if (this.counter == this.data.length - 1){
+        if (this.counter == this.words.length - 1){
             return 0;
         }
 
@@ -28,7 +31,7 @@ export default class GameControl{
 
 
         console.log("start")
-        console.log(this.data[this.counter])
+        console.log(this.words[this.counter])
 
         
         this.setQuestion()
@@ -38,7 +41,7 @@ export default class GameControl{
 
     setQuestion(){
 
-        var question =  this.data[this.counter];
+        var question =  this.words[this.counter];
 
         console.log(question)
 
@@ -46,7 +49,7 @@ export default class GameControl{
         console.log(question.word)
         console.log(question.word.length)
 
-        gameword.setupword(question.word.toUpperCase())
+        gameword.setupword(question)
 
     }
 
@@ -56,14 +59,16 @@ export default class GameControl{
 
         $.get('./demo/json/test2.txt')
         .then(e=>{
+
+            console.log(e)
     
             var data = JSON.parse(e)
     
             console.log(data)
 
-            this.data = data
+            this.words = data.words;
+            this.manifest = data.manifest;
 
-            console.log(this.data)
 
 
             this.start()
