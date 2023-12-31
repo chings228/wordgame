@@ -43,6 +43,11 @@
     display:none;
 }
 
+.gameimg > img{
+
+    height:80%;
+}
+
 .gametext{
     background-color: lightgrey;
     display:none;
@@ -53,6 +58,9 @@
     background-color: limegreen;
     display:none;
 }
+
+
+
 
 
 .gamedetail{
