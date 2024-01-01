@@ -11,6 +11,9 @@
 :root{
 
     --container-margin : 20px;
+    --guesswordcharacter-width : 60px;
+    --guesswordcharacter-height : 80px;
+    --guesswordcharacter-fontsize:50px;
 }
 
 
@@ -30,7 +33,11 @@
 
 .gamecontent{
 
-    height: 10vh;
+    height: 30vh;
+    justify-content: center;
+    align-items: center;
+
+
     
 }
 
@@ -46,6 +53,10 @@
 .gameimg > img{
 
     height:80%;
+    margin:   30px 0px 30px 0px;
+    max-width: 100%;
+    object-fit: cover;
+
 }
 
 .gametext{
@@ -67,7 +78,18 @@
 
     background-color: burlywood;
     height:10vh;
+
+    display:flex;
+
+    align-items: center;
+    justify-content: center;
    
+}
+
+
+#score{
+    font-size : 8vh;
+    font-weight:bold;
 }
 
 .gameword{
@@ -83,10 +105,10 @@
 
 
 
-    width:60px;
+    width:var(--guesswordcharacter-width);
 
 
-    height:80px;
+    height:var(--guesswordcharacter-height);
 
     display:flex;
     align-items: center;
@@ -99,11 +121,10 @@
 
 .gamewordcharacterhint{
 
+    width:var(--guesswordcharacter-width);
 
-    width:60px;
 
-
-    height:80px;
+    height:var(--guesswordcharacter-height);
 
     display:flex;
     align-items: center;
@@ -118,7 +139,60 @@
 
     margin-left : 5px;
     border-bottom: solid black 4px;
-    font-size:50px;
+    font-size:var(--guesswordcharacter-fontsize);
     /* background-color: tomato; */
 
 }
+
+
+#gamepointgain{
+
+    width:50px;
+    height:50px;
+    background-color: linen;
+    display: block;
+    font-size:50px;
+    position:absolute;
+    color:grey;
+    left:50%;
+    background-color: transparent;
+    opacity : 0;
+
+
+    /* animation : pointgainanimation 1s cubic-bezier(1, 0.03, 1, 1); */
+    
+
+
+}
+
+
+@keyframes pointgainanimation {
+
+    from{
+
+        transform:translateY(0px);
+        opacity: 1;
+        
+
+    }
+
+
+    to{
+   
+        transform:translateY(-400px);
+        opacity:0;
+ 
+
+
+    }
+    
+}
+
+
+
+
+.gamewordcontainer{
+    text-align: center;
+}
+
+

@@ -19,14 +19,52 @@ export default class GameInterface{
         console.log(data)
 
 
-
-
-       
+        this.adjustGuessConfig()
 
         this.setupAnswerField()
 
         this.setupContent()
 
+
+    }
+
+
+
+    adjustGuessConfig(){
+
+
+
+        var factor = 1
+
+
+
+        console.log(this.data.word.length)
+
+        if (this.data.word.length > 20){
+            factor = 0.4;
+        }
+        else if (this.data.word.length > 15){
+
+            factor = 0.6;
+
+        }
+
+        else   if (this.data.word.length > 10){
+
+            factor = 0.8;
+
+            
+        }
+
+
+
+        var guessheight = 80 * factor;
+        var guesswidth = 60 * factor;
+        var guessfontsize = 50 * factor;
+
+        $("body").get(0).style.setProperty("--guesswordcharacter-height",`${guessheight}px`)
+        $("body").get(0).style.setProperty("--guesswordcharacter-width",`${guesswidth}px`)
+        $("body").get(0).style.setProperty("--guesswordcharacter-fontsize",`${guessfontsize}px`)
 
     }
 
@@ -41,13 +79,13 @@ export default class GameInterface{
 
             $(".gametext").css("display","none")
             $(".gamevoice").css("display","none")
-            $(".gameimg").css("display","block")
+            $(".gameimg").css("display","flex")
 
             this.setupContentImg()
 
         }
         else if (type == "text"){
-            $(".gametext").css("display","block")
+            $(".gametext").css("display","flex")
             $(".gamevoice").css("display","none")
             $(".gameimg").css("display","none")
 
@@ -55,10 +93,11 @@ export default class GameInterface{
         else{
 
             $(".gametext").css("display","none")
-            $(".gamevoice").css("display","block")
+            $(".gamevoice").css("display","flex")
             $(".gameimg").css("display","none")
 
         }
+
 
 
 

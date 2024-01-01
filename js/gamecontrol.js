@@ -31,7 +31,7 @@ export default class GameControl{
 
 
         console.log("start")
-        console.log(this.words[this.counter])
+        //console.log(this.words[this.counter])
 
         
         this.setQuestion()
@@ -43,11 +43,11 @@ export default class GameControl{
 
         var question =  this.words[this.counter];
 
-        console.log(question)
+        //console.log(question)
 
 
-        console.log(question.word)
-        console.log(question.word.length)
+        //console.log(question.word)
+        //console.log(question.word.length)
 
         gameword.setupword(question)
 
@@ -60,11 +60,11 @@ export default class GameControl{
         $.get('./demo/json/test2.txt')
         .then(e=>{
 
-            console.log(e)
+            //console.log(e)
     
             var data = JSON.parse(e)
     
-            console.log(data)
+            //console.log(data)
 
             this.words = data.words;
             this.manifest = data.manifest;

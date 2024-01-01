@@ -13,8 +13,17 @@ export default class GameWord{
     isKeyboard = true;
 
 
-    timerHintStart = 2000
-    timerHintNextCharacterShow = 1000
+    timerHintStart = 1000
+    timerHintNextCharacterShow = 800
+    timerNextWordShow = 1000
+
+    totalScore = 0;
+
+    pointForQuestion = 100;
+
+
+
+
 
 
     constructor(){
@@ -41,9 +50,7 @@ export default class GameWord{
 
     keytype(e){
 
-            console.log(this.guessCounter)
-
-   
+  
 
             var key = e.key;
 
@@ -114,14 +121,39 @@ export default class GameWord{
 
         console.log(guess)
 
+        console.log(this.word)
+
+
 
         if  (guess == this.word){
 
+
+
+            var mark = 100;
+
+            
+            // animation score 
+
+
+
+            $("#gamepointgain").html(`+${mark}`)
+
+            document.getElementById('gamepointgain').style.animation="pointgainanimation 0.5s cubic-bezier(1, 0.03, 1, 1)";
+
+
+            
+            
+            
             this.isKeyboard = false
 
             console.log("bingo")
             this.isKeyboard= false;
             this.goNextWord()
+
+            
+
+            
+
         }
 
        
@@ -145,7 +177,7 @@ export default class GameWord{
             var that = this
         setTimeout(function(){
 
-          
+                document.getElementById('gamepointgain').style.animation="";
 
                 that.guessCounter = 0;
                 that.hintCounter = 0;
@@ -157,7 +189,7 @@ export default class GameWord{
     
            
 
-        },1000)
+        },this.timerNextWordShow)
 
     }
     else{
@@ -176,7 +208,8 @@ export default class GameWord{
 
 endOfTest(){
 
-    console.log("end of test")
+
+    this.isKeyboard = false;
 
     // bootbox.alert({
         
@@ -194,8 +227,8 @@ endOfTest(){
 
         new GameInterface(word)
 
-        console.log(word)
-        this.word = word.word 
+        //console.log(word)
+        this.word = word.word.toUpperCase()
 
 
 
