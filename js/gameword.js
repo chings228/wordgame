@@ -12,9 +12,16 @@ export default class GameWord{
 
     isKeyboard = true;
 
+    isEnd = false;
+
     defaultTimerHintStart = 2000
+
+    // variable depend on answer length 
     timerHintStart 
+
+
     timerHintNextCharacterShow = 800
+
     timerNextWordShow = 1000
 
     totalScore = 0;
@@ -22,13 +29,19 @@ export default class GameWord{
     pointForQuestion = 100;
 
 
+    points = [];
+    words = [];
 
-
-
+    speedfactor = 0.2
+ 
 
     constructor(){
 
         console.log("gameword constructor")
+
+        this.timerHintNextCharacterShow *= this.speedfactor
+        this.timerNextWordShow *= this.speedfactor
+        this.defaultTimerHintStart *= this.speedfactor
 
 
         document.addEventListener("keydown",e=>{
@@ -127,9 +140,9 @@ export default class GameWord{
             guess += $(elementdiv).html()
         }
 
-        console.log(guess)
+        // console.log(guess)
 
-        console.log(this.word)
+        // console.log(this.word)
 
 
 
@@ -143,12 +156,20 @@ export default class GameWord{
             // animation score 
 
 
+            clearTimeout(this.hintTimer)
+
             if (this.hintCounter > 0){
                 mark *= 0.8;
 
-                var numberOfWord = this.word.length;
+                if (this.hintCounter > 1){
 
-                mark *= ( (numberOfWord - this.hintCounter) / numberOfWord)
+                    var numberOfWord = this.word.length-1;
+
+                    mark *= ( (numberOfWord - this.hintCounter + 1) / numberOfWord)
+
+                }
+
+
 
 
             }
@@ -167,6 +188,8 @@ export default class GameWord{
 
 
             this.totalScore += mark
+
+            this.points.push(mark)
 
             console.log(this.totalScore)
 
@@ -204,12 +227,14 @@ export default class GameWord{
 
         console.log("go Next word");
 
-        console.log(gamecontrol)
+        var flag = gamecontrol.goNextQuestion()
 
-        if (gamecontrol.goNextQuestion() != 0){
+        console.log("gamecontrol",flag)
+
+        if (flag != 0){
 
             var that = this
-        setTimeout(function(){
+            setTimeout(function(){
 
                 document.getElementById('gamepointgain').style.animation="";
 
@@ -223,16 +248,15 @@ export default class GameWord{
     
            
 
-        },this.timerNextWordShow)
+            },this.timerNextWordShow)
 
-    }
-    else{
-        console.log("end of test")
-        this.endOfTest()
-    }
+        }
+        else{
+            console.log("end of test")
+            this.endOfTest()
+        }
 
 
-        
 
     }
 
@@ -242,15 +266,49 @@ export default class GameWord{
 
     endOfTest(){
 
-
+        this.isEnd = true;
         this.isKeyboard = false;
 
-        // bootbox.alert({
-            
-        //     message:"sfsfsfsf",
-        //     centerVertical:true
+        clearTimeout(this.hintTimer)
 
-        // })
+        console.log(this.points)
+
+
+        console.log(gamecontrol.words)
+        var html = `<div class=dialog_result_container>`
+
+        var counter = 0
+        this.points.forEach(e=>{
+
+            console.log(e)
+
+            var word = gamecontrol.words[counter].word.toUpperCase();
+
+            
+
+            html += `
+            <div class=dialog_result_row>
+            <div class=dialog_result_word>${word}</div>
+
+            <div class= dialog_result_mark>${e}</div>
+            </div>
+            
+            `
+
+            counter++;
+        })
+
+        html += `</div>`
+
+        bootbox.dialog({
+            
+            title : "Result",
+            message:html
+           
+
+        })
+
+        
     }
 
 
@@ -266,17 +324,17 @@ export default class GameWord{
 
         var additonalstarthinttimefactor = Math.floor(this.word.length / 7) 
 
-        console.log(additonalstarthinttimefactor)
+        //console.log(additonalstarthinttimefactor)
 
         this.timerHintStart  = this.defaultTimerHintStart + additonalstarthinttimefactor * 500
 
-        console.log(this.word.length,this.timerHintStart)
+        //console.log(this.word.length,this.timerHintStart)
         
         var gameinterface = new GameInterface(data)
 
         gameinterface.setupContent(e=>{
 
-            console.log(e)
+           // console.log(e)
 
             if (e){
 
@@ -313,6 +371,11 @@ export default class GameWord{
     showHint(){
 
 
+        if (this.isEnd){
+            return
+        }
+
+
 
         var character = this.word.charAt(this.hintCounter)
 
@@ -329,7 +392,7 @@ export default class GameWord{
 
 
 
-        if (this.hintCounter < this.word.length - 1 && this.isKeyboard == true){
+        if (this.hintCounter < this.word.length - 1 ){
 
             this.hintCounter ++
 
@@ -346,7 +409,11 @@ export default class GameWord{
 
             //this.isKeyboard = false
 
-            console.log("next")
+            console.log("hint finish jump next")
+
+          this.points.push(0)
+
+          console.log(this.points)
 
             this.goNextWord()
 

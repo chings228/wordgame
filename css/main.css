@@ -196,3 +196,30 @@
 }
 
 
+
+.dialog_result_container{
+
+
+    margin : 10px;
+    /* background-color: lightgreen; */
+    font-size : 1em;
+
+
+}
+
+.dialog_result_row{
+    display:flex;
+    align-items: stretch;
+    margin-top: 2px;
+    flex : 3 1;
+    
+}
+
+.dialog_result_word{
+    width:75%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding:0px 5px 0px 5px;
+
+}

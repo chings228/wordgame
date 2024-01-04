@@ -2,11 +2,10 @@
 
 export default class GameControl{
 
-
+    words;
 
     counter = 0;
 
-    word;
     manifest;
 
     constructor(){

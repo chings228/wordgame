@@ -32,7 +32,12 @@
       "type":"image",
       "image":"laddle.jpg"
   }
-
+  ,
+    {
+      "word":"thermometer",
+      "type":"image",
+      "image":"thermometer.jpg"
+  }
 
 
 

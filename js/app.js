@@ -22,6 +22,15 @@ $(function(){
 
 
 
+    bootbox.setDefaults({
+
+        backdrop: true,
+        closeButton: true,
+        centerVertical: true
+    })
+
+
+
     gamecontrol.load()
 
 

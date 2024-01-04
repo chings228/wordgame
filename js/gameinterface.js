@@ -99,7 +99,7 @@ export default class GameInterface{
             var img = document.getElementById("guessimg")
 
             img.onload =()=>{
-                console.log("img done")
+                //console.log("img done")
                 callback(true)
             }
 
