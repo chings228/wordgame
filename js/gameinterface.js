@@ -23,10 +23,12 @@ export default class GameInterface{
 
         this.setupAnswerField()
 
-        this.setupContent()
+        //this.setupContent()
 
 
     }
+
+
 
 
 
@@ -69,7 +71,7 @@ export default class GameInterface{
     }
 
 
-    setupContent(){
+    setupContent(callback){
 
         var type = this.data.type
 
@@ -81,7 +83,32 @@ export default class GameInterface{
             $(".gamevoice").css("display","none")
             $(".gameimg").css("display","flex")
 
-            this.setupContentImg()
+            var imglink = this.data.image
+
+
+            console.log(imglink)
+    
+    
+            // var html = `<img src='demo/img/${imglink}'>`
+    
+            // $(".gameimg").html(html)
+
+            var html = `<img id=guessimg>`
+            $(".gameimg").html(html)
+
+            var img = document.getElementById("guessimg")
+
+            img.onload =()=>{
+                console.log("img done")
+                callback(true)
+            }
+
+            img.src = `demo/img/${imglink}`
+            
+
+
+
+            
 
         }
         else if (type == "text"){
@@ -100,7 +127,7 @@ export default class GameInterface{
 
 
 
-
+        
 
 
 
@@ -108,19 +135,6 @@ export default class GameInterface{
     }
 
 
-    setupContentImg(){
-
-        var imglink = this.data.image
-
-
-        console.log(imglink)
-
-
-        var html = `<img src='demo/img/${imglink}'>`
-
-        $(".gameimg").html(html)
-
-    }
 
 
     setupContentText(){

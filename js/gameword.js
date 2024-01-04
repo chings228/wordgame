@@ -12,8 +12,8 @@ export default class GameWord{
 
     isKeyboard = true;
 
-
-    timerHintStart = 1000
+    defaultTimerHintStart = 2000
+    timerHintStart 
     timerHintNextCharacterShow = 800
     timerNextWordShow = 1000
 
@@ -39,6 +39,13 @@ export default class GameWord{
            
         })
 
+
+
+   
+
+
+
+
         
     }
 
@@ -56,6 +63,7 @@ export default class GameWord{
 
             var keycode = e.keyCode;
 
+           
 
             if (keycode == 8 && this.guessCounter > 0) {
 
@@ -135,13 +143,39 @@ export default class GameWord{
             // animation score 
 
 
+            if (this.hintCounter > 0){
+                mark *= 0.8;
 
-            $("#gamepointgain").html(`+${mark}`)
+                var numberOfWord = this.word.length;
+
+                mark *= ( (numberOfWord - this.hintCounter) / numberOfWord)
+
+
+            }
+
+
+
+
+
+
+            ////////
+
+
+            $("#gamepointgain").html(`+${Math.round(mark)}`)
 
             document.getElementById('gamepointgain').style.animation="pointgainanimation 0.5s cubic-bezier(1, 0.03, 1, 1)";
 
 
-            
+            this.totalScore += mark
+
+            console.log(this.totalScore)
+
+            var that = this
+            setTimeout(function(){
+
+                $("#score").html(Math.round(that.totalScore))
+            },500)
+          
             
             
             this.isKeyboard = false
@@ -206,44 +240,70 @@ export default class GameWord{
 
 
 
-endOfTest(){
+    endOfTest(){
 
 
-    this.isKeyboard = false;
+        this.isKeyboard = false;
 
-    // bootbox.alert({
+        // bootbox.alert({
+            
+        //     message:"sfsfsfsf",
+        //     centerVertical:true
+
+        // })
+    }
+
+
+
+
+    setupword(data){
+
+        this.word = data.word.toUpperCase()
+
+
+        // increase additional time for start hint 
+
+
+        var additonalstarthinttimefactor = Math.floor(this.word.length / 7) 
+
+        console.log(additonalstarthinttimefactor)
+
+        this.timerHintStart  = this.defaultTimerHintStart + additonalstarthinttimefactor * 500
+
+        console.log(this.word.length,this.timerHintStart)
         
-    //     message:"sfsfsfsf",
-    //     centerVertical:true
+        var gameinterface = new GameInterface(data)
 
-    // })
-}
+        gameinterface.setupContent(e=>{
 
+            console.log(e)
 
-
-
-    setupword(word){
+            if (e){
 
 
-        new GameInterface(word)
+                //console.log(word)
+                
 
-        //console.log(word)
-        this.word = word.word.toUpperCase()
+                // timer for starting show hint 
 
+                var that = this
 
-
-
-
-        // timer for starting show hint 
-
-        var that = this
-
-        setTimeout(function(){
+                setTimeout(function(){
 
 
-            that.showHint()
+                    that.showHint()
 
-        },this.timerHintStart)
+                },this.timerHintStart)
+
+
+            }
+
+
+        })
+
+
+
+
 
         
             
@@ -262,6 +322,7 @@ endOfTest(){
         var elementdiv = `#word_${this.hintCounter} > .gamewordcharacterhint`
 
 
+        $(`#word_${this.hintCounter}`).css("border-color","blue")
 
         $(elementdiv).html(character.toUpperCase())
 

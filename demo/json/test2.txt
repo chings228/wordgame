@@ -3,20 +3,34 @@
 {
 
 "words":[
+
+
   {
-      "word":"Cookie",
+      "word":"tiger",
       "type":"image",
-      "image":"demo1.jpg"
+      "image":"tiger.jpg"
+  },
+
+  {
+      "word":"whisk",
+      "type":"image",
+      "image":"whisk.jpg"
   },
   {
-      "word":"Biscuit",
+      "word":"grater",
       "type":"image",
-      "image":"demo2.jpg"
+      "image":"grater.jpg"
   },
     {
-      "word":"Kitchen",
+      "word":"scissors",
       "type":"image",
-      "image":"demo3.jpg"
+      "image":"scissors.jpg"
+  },
+
+    {
+      "word":"laddle",
+      "type":"image",
+      "image":"laddle.jpg"
   }
 
 
