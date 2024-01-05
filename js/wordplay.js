@@ -32,7 +32,8 @@ export default class GameWord{
     points = [];
     words = [];
 
-    speedfactor = 0.2
+    //speedfactor = 0.2
+    speedfactor = 1;
  
 
     constructor(){
@@ -72,9 +73,9 @@ export default class GameWord{
 
   
 
-            var key = e.key;
+            let key = e.key;
 
-            var keycode = e.keyCode;
+            let keycode = e.keyCode;
 
            
 
@@ -84,7 +85,7 @@ export default class GameWord{
 
                 this.guessCounter--
 
-                var elementdiv = `#word_${this.guessCounter} > .gamewordcharacter`
+                let elementdiv = `#word_${this.guessCounter} > .gamewordcharacter`
                 $(elementdiv).html('')
             }
             else{
@@ -189,7 +190,7 @@ export default class GameWord{
 
             this.totalScore += mark
 
-            this.points.push(mark)
+            this.points.push(Math.round(mark))
 
             console.log(this.totalScore)
 

@@ -17,11 +17,11 @@ export default class GameInterface{
 
         this.data = data
         console.log(data)
-
+        this.setupAnswerField()
 
         this.adjustGuessConfig()
 
-        this.setupAnswerField()
+       
 
         //this.setupContent()
 
@@ -36,33 +36,25 @@ export default class GameInterface{
 
 
 
-        var factor = 1
+       const maxGuessWidth = 40
+
+        let fullwidth = $(".gameword").width()
 
 
 
-        console.log(this.data.word.length)
-
-        if (this.data.word.length > 20){
-            factor = 0.4;
-        }
-        else if (this.data.word.length > 15){
-
-            factor = 0.6;
-
-        }
-
-        else   if (this.data.word.length > 10){
-
-            factor = 0.8;
-
-            
-        }
+        let marginLeft =  parseInt($(".gamewordcharactercontainer").css("margin-left").replace("px",""))
 
 
+        let guesswidth = fullwidth / this.data.word.length - marginLeft
 
-        var guessheight = 80 * factor;
-        var guesswidth = 60 * factor;
-        var guessfontsize = 50 * factor;
+
+        guesswidth = Math.min(maxGuessWidth,guesswidth)
+
+        let guessheight  = guesswidth * 1.8
+
+        let  guessfontsize =  guesswidth * 1
+
+
 
         $("body").get(0).style.setProperty("--guesswordcharacter-height",`${guessheight}px`)
         $("body").get(0).style.setProperty("--guesswordcharacter-width",`${guesswidth}px`)

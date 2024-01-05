@@ -1,6 +1,6 @@
 
 import GameControl from "./gamecontrol.js"
-import GameWord from "./gameword.js"
+import GameWord from "./wordplay.js"
 
 
 var gameword , gamecontrol
