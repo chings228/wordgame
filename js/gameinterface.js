@@ -108,12 +108,61 @@ export default class GameInterface{
             $(".gamevoice").css("display","none")
             $(".gameimg").css("display","none")
 
+
+            $(".gametextquestion").html(this.data.question)
+
+
+            console.log(this.data.question.length)
+            callback(true)
+
         }
         else{
 
             $(".gametext").css("display","none")
             $(".gamevoice").css("display","flex")
             $(".gameimg").css("display","none")
+
+
+            //callback(true)
+
+            const voicelink = `./demo/voice/${this.data.voice}`;
+
+            let audio = new Audio()
+
+            audio.src = voicelink
+
+            $(audio).on("loadedmetadata",()=>{
+
+                console.log(audio.duration);
+
+                $(".voicebtn").attr("src","./assets/voiceplay_black.svg");
+
+                $(".voicebtn").click(e=>{
+
+                    audio.play()
+
+
+
+                })
+
+                audio.onended = ()=>{
+                    console.log("on end")
+
+                //     $(".voicebtn").off("click")
+                //    audio.src = ''
+
+                   setTimeout(function(){
+
+                    callback(true)
+                   },1000)
+
+                    
+                    
+                }
+
+            })
+
+            
 
         }
 

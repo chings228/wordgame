@@ -19,7 +19,7 @@
 
 .container{
 
-    background-color: aliceblue;
+    /* background-color: aliceblue; */
     min-width: 400px;
     max-width:800px;
     height:calc(100vh - 2 * var(--container-margin));
@@ -33,7 +33,7 @@
 
 .gamecontent{
 
-    height: 30vh;
+    min-height: 40vh;
     justify-content: center;
     align-items: center;
 
@@ -46,8 +46,9 @@
 .gameimg{
 
 
-    background-color: beige;
+    /* background-color: beige; */
     display:none;
+    height : 40vh;
 }
 
 .gameimg > img{
@@ -57,16 +58,29 @@
     max-width: 100%;
     object-fit: cover;
 
+
 }
 
 .gametext{
-    background-color: lightgrey;
+    /* background-color: lightgrey; */
     display:none;
 
 }
 
+ .gametextquestion{
+
+    display:flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 30px;
+    padding:10px;
+
+ }   
+
+
 .gamevoice{
-    background-color: limegreen;
+    /* background-color: limegreen; */
     display:none;
 }
 
@@ -76,7 +90,7 @@
 
 .gamedetail{
 
-    background-color: burlywood;
+    /* background-color: burlywood; */
     height:10vh;
 
     display:flex;
@@ -94,7 +108,7 @@
 
 .gameword{
 
-    background-color: yellow;
+    /* background-color: yellow; */
     display: flex;
     justify-content: center;
 
@@ -223,3 +237,21 @@
     padding:0px 5px 0px 5px;
 
 }
+
+.gamevoicecontainer{
+
+    display:flex;
+    justify-content: flex;
+    align-items: flex;
+}
+
+
+.voicebtn{
+
+    width:100px;
+    height:100px;
+
+
+}
+
+

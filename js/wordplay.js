@@ -32,8 +32,8 @@ export default class GameWord{
     points = [];
     words = [];
 
-    //speedfactor = 0.2
-    speedfactor = 1;
+    speedfactor = 0.2
+    //speedfactor = 1;
  
 
     constructor(){
@@ -223,6 +223,11 @@ export default class GameWord{
 
         clearTimeout(this.hintTimer)
 
+
+        $(".voicebtn").attr("src","./assets/voiceplay_lightgray.svg");
+
+        $(".voicebtn").off("click")
+
         this.guessCounter = 0;
         this.hintCounter = 0;
 
@@ -275,13 +280,14 @@ export default class GameWord{
         console.log(this.points)
 
 
+
+
         console.log(gamecontrol.words)
         var html = `<div class=dialog_result_container>`
 
         var counter = 0
         this.points.forEach(e=>{
 
-            console.log(e)
 
             var word = gamecontrol.words[counter].word.toUpperCase();
 
@@ -303,7 +309,7 @@ export default class GameWord{
 
         bootbox.dialog({
             
-            title : "Result",
+            title : `Result - ${this.totalScore} / ${gamecontrol.words.length * 100} `,
             message:html
            
 
@@ -331,7 +337,7 @@ export default class GameWord{
 
         //console.log(this.word.length,this.timerHintStart)
         
-        var gameinterface = new GameInterface(data)
+        let gameinterface = new GameInterface(data)
 
         gameinterface.setupContent(e=>{
 

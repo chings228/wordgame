@@ -56,7 +56,7 @@ export default class GameControl{
 
     load(){
 
-        $.get('./demo/json/test2.txt')
+        $.get('./demo/json/test4.txt')
         .then(e=>{
 
             //console.log(e)

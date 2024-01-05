@@ -1,0 +1,33 @@
+
+
+{
+
+"words":[
+
+
+  {
+      "word":"tiger",
+      "type":"voice",
+      "voice":"voice1.mp3"
+  },
+
+   {
+      "word":"Good Morning",
+      "type":"voice",
+      "voice":"voice2.mp3"
+  },
+     {
+      "word":"Hello",
+      "type":"voice",
+      "voice":"voice3.mp3"
+  }
+
+
+
+],
+
+"manifest":{
+  "isRandom":false
+}
+  
+}
