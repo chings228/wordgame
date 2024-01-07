@@ -95,7 +95,7 @@ export default class GameInterface{
                 callback(true)
             }
 
-            img.src = `demo/img/${imglink}`
+            img.src = `../../demo/img/${imglink}`
             
 
 

@@ -13,6 +13,8 @@ export default class GameControl{
 
         // console.log(gameword)
 
+        console.log("game control construccotr")
+
     }
 
     goNextQuestion(){
@@ -56,7 +58,7 @@ export default class GameControl{
 
     load(){
 
-        $.get('./demo/json/test2.txt')
+        $.get('../../demo/json/test2.txt')
         .then(e=>{
 
             //console.log(e)
