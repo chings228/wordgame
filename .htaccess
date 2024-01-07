@@ -1,0 +1,10 @@
+
+
+
+RewriteEngine on
+
+
+
+
+
+RewriteRule "^s/(.*)$" "index.html?qid=$1" [L,NC]

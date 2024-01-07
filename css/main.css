@@ -22,9 +22,11 @@
     /* background-color: aliceblue; */
     min-width: 400px;
     max-width:800px;
-    height:calc(100vh - 2 * var(--container-margin));
+    /* height:calc(100vh - 2 * var(--container-margin)); */
     margin:  var(--container-margin) auto var(--container-margin) auto;
-
+    background-color:#f3f1f1;
+    padding : 40px 15px 40px 15px;
+    border-radius: 40px;
     
 
 

@@ -139,6 +139,9 @@ export default class GameInterface{
 
                 $(".voicebtn").click(e=>{
 
+                    $(".voicebtn").attr("src","./assets/voiceplay_lightgray.svg");
+                    $(".voicebtn").off("click")
+
                     audio.play()
 
 

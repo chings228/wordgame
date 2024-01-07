@@ -20,7 +20,7 @@ export default class GameWord{
     timerHintStart 
 
 
-    timerHintNextCharacterShow = 800
+    timerHintNextCharacterShow = 1000
 
     timerNextWordShow = 1000
 
@@ -33,7 +33,7 @@ export default class GameWord{
     words = [];
 
     speedfactor = 0.2
-    //speedfactor = 1;
+    speedfactor = 1;
  
 
     constructor(){
@@ -188,7 +188,7 @@ export default class GameWord{
             document.getElementById('gamepointgain').style.animation="pointgainanimation 0.5s cubic-bezier(1, 0.03, 1, 1)";
 
 
-            this.totalScore += mark
+            this.totalScore += Math.round(mark)
 
             this.points.push(Math.round(mark))
 
