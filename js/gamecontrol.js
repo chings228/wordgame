@@ -34,8 +34,35 @@ export default class GameControl{
         console.log("start")
         //console.log(this.words[this.counter])
 
+
+        bootbox.dialog({
+
+            
+            
+            title : "Start",
+            message : "This is about xxxxxxxx",
+            buttons:{
+
+                cancel:{
+                    label:"Cancel"
+                },
+                start:{
+                    label : "Start",
+                    className : 'btn-info',
+                    callback : ()=>{
+
+                        this.setQuestion()
+                        
+                    }
+
+                }
+
+            }
+        })
+
+
         
-        this.setQuestion()
+      
 
     }
 
@@ -58,7 +85,7 @@ export default class GameControl{
 
     load(){
 
-        $.get('../../demo/json/test2.txt')
+        $.get('../../demo/json/test4.txt')
         .then(e=>{
 
             //console.log(e)

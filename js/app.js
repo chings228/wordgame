@@ -12,6 +12,8 @@ $(function(){
 
     console.log("jquery")
 
+    console.log(window.location)
+
     gameword = new GameWord()
 
     window.gameword = gameword

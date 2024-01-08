@@ -125,7 +125,7 @@ export default class GameInterface{
 
             //callback(true)
 
-            const voicelink = `./demo/voice/${this.data.voice}`;
+            const voicelink = `../../demo/voice/${this.data.voice}`;
 
             let audio = new Audio()
 
@@ -135,18 +135,18 @@ export default class GameInterface{
 
                 console.log(audio.duration);
 
-                $(".voicebtn").attr("src","./assets/voiceplay_black.svg");
+                $(".voicebtn").attr("src","../../assets/voiceplay_black.svg");
 
-                $(".voicebtn").click(e=>{
+                // $(".voicebtn").click(e=>{
 
-                    $(".voicebtn").attr("src","./assets/voiceplay_lightgray.svg");
-                    $(".voicebtn").off("click")
+                //     $(".voicebtn").attr("src","../../assets/voiceplay_lightgray.svg");
+                //     $(".voicebtn").off("click")
 
                     audio.play()
 
 
 
-                })
+                //})
 
                 audio.onended = ()=>{
                     console.log("on end")
