@@ -5,6 +5,7 @@ RewriteEngine on
 
 
 
+RewriteRule "^q/(.*)/(.*)$" "question.php?qid=$1&title=$2" [L,NC]
 
 
-RewriteRule "^s/(.*)$" "question.html?qid=$1" [L,NC]
+RewriteRule "^q/(.*)$" "question.php?qid=$1" [L,NC]

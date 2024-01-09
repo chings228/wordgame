@@ -10,7 +10,19 @@ var gameword , gamecontrol
 
 $(function(){
 
+    
+
+    if (window.location.hostname != "dev.fillanswer.com") {
+
+            console.log = function () { };
+
+        
+    }
+
     console.log("jquery")
+
+
+    console.log(qid);
 
     console.log(window.location)
 
@@ -22,7 +34,13 @@ $(function(){
 
     window.gamecontrol = gamecontrol
 
+    console.log(title,description);
 
+    document.title = title;
+
+    const titleHypen = title.replace(" ","-");
+
+    window.history.pushState('data',title, `${window.location.origin}/q/${qid}/${titleHypen}`)
 
     bootbox.setDefaults({
 

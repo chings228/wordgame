@@ -39,8 +39,8 @@ export default class GameControl{
 
             
             
-            title : "Start",
-            message : "This is about xxxxxxxx",
+            title : `${this.manifest.title}`,
+            message : `${this.manifest.description}`,
             buttons:{
 
                 cancel:{
@@ -51,7 +51,10 @@ export default class GameControl{
                     className : 'btn-info',
                     callback : ()=>{
 
+                        this.counter = 0;
+                        gameword.reset()
                         this.setQuestion()
+                        
                         
                     }
 
@@ -71,11 +74,6 @@ export default class GameControl{
 
         var question =  this.words[this.counter];
 
-        //console.log(question)
-
-
-        //console.log(question.word)
-        //console.log(question.word.length)
 
         gameword.setupword(question)
 
@@ -85,19 +83,28 @@ export default class GameControl{
 
     load(){
 
-        $.get('../../demo/json/test4.txt')
+        $.get(`../../userdata/question/${qid}.txt`)
         .then(e=>{
 
-            //console.log(e)
-    
-            var data = JSON.parse(e)
-    
-            //console.log(data)
 
-            this.words = data.words;
+            var data = JSON.parse(e)
+  
+            
             this.manifest = data.manifest;
 
 
+            this.words = data.words;
+
+            if (this.manifest.isRandom){
+
+                console.log("random")
+
+                this.words = this.words.sort( () => Math.random() - 0.5) 
+
+                
+            }
+
+            console.log(this.words)
 
             this.start()
     

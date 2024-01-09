@@ -75,7 +75,7 @@ export default class GameInterface{
             $(".gamevoice").css("display","none")
             $(".gameimg").css("display","flex")
 
-            var imglink = this.data.image
+            var imglink = this.data.asset
 
 
             console.log(imglink)
@@ -95,7 +95,7 @@ export default class GameInterface{
                 callback(true)
             }
 
-            img.src = `../../demo/img/${imglink}`
+            img.src = `../../userdata/image/${imglink}`
             
 
 
@@ -109,10 +109,10 @@ export default class GameInterface{
             $(".gameimg").css("display","none")
 
 
-            $(".gametextquestion").html(this.data.question)
+            $(".gametextquestion").html(this.data.asset)
 
 
-            console.log(this.data.question.length)
+            console.log(this.data.asset.length)
             callback(true)
 
         }
@@ -125,7 +125,7 @@ export default class GameInterface{
 
             //callback(true)
 
-            const voicelink = `../../demo/voice/${this.data.voice}`;
+            const voicelink = `../../userdata/voice/${this.data.asset}`;
 
             let audio = new Audio()
 
@@ -135,14 +135,17 @@ export default class GameInterface{
 
                 console.log(audio.duration);
 
-                $(".voicebtn").attr("src","../../assets/voiceplay_black.svg");
 
-                // $(".voicebtn").click(e=>{
 
-                //     $(".voicebtn").attr("src","../../assets/voiceplay_lightgray.svg");
-                //     $(".voicebtn").off("click")
+
+
+                setTimeout(()=>{
 
                     audio.play()
+
+                },1000)
+
+                    
 
 
 
@@ -151,8 +154,6 @@ export default class GameInterface{
                 audio.onended = ()=>{
                     console.log("on end")
 
-                //     $(".voicebtn").off("click")
-                //    audio.src = ''
 
                    setTimeout(function(){
 

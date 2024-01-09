@@ -8,6 +8,7 @@ export default class GameWord{
     word;
 
     hintTimer;
+    initHintTimer;
     hintCounter = 0;
 
 
@@ -15,7 +16,7 @@ export default class GameWord{
 
     isEnd = false;
 
-    defaulttimerHintStartVal= 2000
+    defaulttimerHintStartVal= 1500
 
     // variable depend on answer length 
     timerHintStartVal
@@ -34,7 +35,7 @@ export default class GameWord{
     words = [];
 
     speedfactor = 0.2
-    speedfactor = 1;
+   //speedfactor = 1;
  
 
     constructor(){
@@ -65,7 +66,20 @@ export default class GameWord{
     }
 
 
+    reset(){
 
+        $("#score").html(0);
+        this.totalScore = 0;
+        this.guessCounter = 0;
+        this.hintCounter = 0;
+        this.isEnd = false;
+        this.points = [];
+        this.words = [];
+        this.isKeyboard = true;
+    
+
+
+    }
 
 
 
@@ -94,12 +108,12 @@ export default class GameWord{
                 if (((keycode >= 65 && keycode <= 90) || keycode == 189 || keycode == 32 || (keycode >= 48 && keycode <= 57)) && this.guessCounter < this.word.length ){
 
 
-                    var elementdiv = `#word_${this.guessCounter} > .gamewordcharacter`
+                    const elementdiv = `#word_${this.guessCounter} > .gamewordcharacter`
 
 
                     $(elementdiv).html(key.toUpperCase())
 
-
+                    this.changeBottomLineToRedIfNotMatch()
 
                     this.guessCounter++
 
@@ -223,11 +237,8 @@ export default class GameWord{
     goNextWord(){
 
         clearTimeout(this.hintTimer)
+        clearTimeout(this.initHintTimer)
 
-
-        $(".voicebtn").attr("src","../../assets/voiceplay_lightgray.svg");
-
-        $(".voicebtn").off("click")
 
         this.guessCounter = 0;
         this.hintCounter = 0;
@@ -277,6 +288,7 @@ export default class GameWord{
         this.isKeyboard = false;
 
         clearTimeout(this.hintTimer)
+        clearTimeout(this.initHintTimer)
 
         console.log(this.points)
 
@@ -287,8 +299,11 @@ export default class GameWord{
         var html = `<div class=dialog_result_container>`
 
         var counter = 0
+
+        console.log(gamecontrol.words , counter)
         this.points.forEach(e=>{
 
+            console.log(e,counter)
 
             var word = gamecontrol.words[counter].word.toUpperCase();
 
@@ -310,8 +325,29 @@ export default class GameWord{
 
         bootbox.dialog({
             
-            title : `Result - ${this.totalScore} / ${gamecontrol.words.length * 100} `,
-            message:html
+            title : `Result - ${Math.round(this.totalScore/(gamecontrol.words.length*100))}% (${this.totalScore} / ${gamecontrol.words.length * 100}) `,
+            message:html,
+
+
+            buttons:{
+
+                cancel:{
+                    label:"Cancel"
+                },
+                restart:{
+                    label:"Restart",
+                    className : "btn-info",
+                    callback : ()=>{
+
+                        gamecontrol.start()
+
+                    }
+                }
+
+
+
+
+            }
            
 
         })
@@ -342,7 +378,10 @@ export default class GameWord{
 
         gameinterface.setupContent(e=>{
 
-           // console.log(e)
+
+            var starttime = Date.now();
+
+           console.log("finishinterface start ",starttime)
 
             if (e){
 
@@ -354,9 +393,11 @@ export default class GameWord{
 
                 
 
-               setTimeout(()=>{
+               this.initHintTimer = setTimeout(()=>{
 
+                var diff = Date.now() -  starttime;
 
+                console.log("finishinterface end ",diff)
                     this.showHint()
 
                   
@@ -378,6 +419,47 @@ export default class GameWord{
     }
 
 
+    changeBottomLineToRedIfNotMatch(){
+
+        for (var i =0 ; i<this.word.length ; i++){
+
+
+            const hintchardiv = `#word_${i} > .gamewordcharacterhint`
+            const answerchardiv = `#word_${i} > .gamewordcharacter`
+
+            const hintchar = $(hintchardiv).html();
+            const answerchar = $(answerchardiv).html();
+
+            let linecolor = "blue";
+
+            console.log(hintchar,answerchar)
+
+
+
+            if (hintchar != '' && answerchar != ''){
+
+                if (hintchar != answerchar){
+
+                    linecolor = "red"
+                }
+
+
+            } 
+            else if (hintchar == ''){
+                    linecolor = "black"
+            }
+
+
+
+            $(`#word_${i}`).css("border-color",`${linecolor}`)
+
+
+        }
+
+
+    }
+
+
     showHint(){
 
 
@@ -395,12 +477,10 @@ export default class GameWord{
         var elementdiv = `#word_${this.hintCounter} > .gamewordcharacterhint`
 
 
-        $(`#word_${this.hintCounter}`).css("border-color","blue")
-
         $(elementdiv).html(character.toUpperCase())
 
 
-
+        this.changeBottomLineToRedIfNotMatch()
 
         if (this.hintCounter < this.word.length - 1 ){
 
@@ -409,7 +489,7 @@ export default class GameWord{
 
 
            this.hintTimer = setTimeout(()=>{
-
+                console.log("show next hint ",Date.now())
 
                 this.showHint()
             },this.timerHintNextCharacterShowVal)
