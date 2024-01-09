@@ -35,7 +35,7 @@ export default class GameWord{
     words = [];
 
     speedfactor = 0.2
-   //speedfactor = 1;
+   speedfactor = 1;
  
 
     constructor(){
@@ -323,9 +323,13 @@ export default class GameWord{
 
         html += `</div>`
 
+        console.log(this.totalScore,gamecontrol.words.length);
+
+        console.log(this.totalScore/(gamecontrol.words.length*100));
+
         bootbox.dialog({
             
-            title : `Result - ${Math.round(this.totalScore/(gamecontrol.words.length*100))}% (${this.totalScore} / ${gamecontrol.words.length * 100}) `,
+            title : `Result - ${Math.round(parseInt(this.totalScore)/(parseInt(gamecontrol.words.length)))}% (${this.totalScore} / ${gamecontrol.words.length * 100}) `,
             message:html,
 
 
